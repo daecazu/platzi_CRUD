@@ -1,20 +1,36 @@
 clients ='pablo,ricardo,'
+labels ={
+    'label1': 'client is already in the client\'s list ',
+    'label2': 'client is not in client\'s list'
+}
 
 
 def create_client(client_name):
     global clients
+    global labels
     if client_name not in clients:
         clients += client_name
         _add_comma()
     else:
-        print('client is already in the client\'s list ')
+        print(labels['label1'])
 
 def update_client(client_name, updated_client_name):
     global clients
+    global labels
     if client_name in clients:
         clients = clients.replace(client_name + ',', updated_client_name+ ',')
     else:
-        print('client not found')
+        print(labels['label2'])
+
+
+def delete_client(client_name):
+    global clients
+    global labels
+
+    if client_name in clients:
+        clients = clients.replace(client_name + ',', '')
+    else:
+        print(labels['label2'])
 
 
 def list_clients():
@@ -46,7 +62,8 @@ if __name__ == '__main__':
         client_name = _get_client_name()
         create_client(client_name)
     elif command == 'D':
-        pass
+        client_name = _get_client_name()
+        delete_client(client_name)
     elif command == 'U':
         client_name = _get_client_name()
         update_client_name=_get_client_name('updated' )
